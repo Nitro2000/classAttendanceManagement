@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/select"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/select_your_account"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black" />
+    <ImageView
+        android:id="@+id/student"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@+id/select"
+        android:src="@drawable/student" />
+    <ImageView
+        android:id="@+id/teacher"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/teacher"
+        android:layout_below="@+id/select"
+        android:layout_toRightOf="@+id/student"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="110dp"/>
+
+    <EditText
+        android:id="@+id/studentpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/student_1"
+        android:layout_marginLeft="27dp"
+        android:padding="10dp"
+        android:layout_below="@+id/student"
+        android:textSize="28dp"
+        android:textColorHint="#000000"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/teacherpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/teacher"
+        android:layout_marginLeft="247dp"
+        android:padding="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/teacher"
+        android:textSize="28dp"
+        android:textColorHint="#000000"
+        android:textStyle="bold"/>
+
+
+
+
+
+</RelativeLayout>

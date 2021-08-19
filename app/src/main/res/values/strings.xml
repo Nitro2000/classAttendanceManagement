@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">classAttendanceManagement</string>
+
+    <string name="select_your_account">Select your account type </string>
+</resources>
