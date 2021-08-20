@@ -1,64 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:background="@color/backgroundBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="433dp"
+        android:layout_height="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:srcCompat="@drawable/ic_wave"
+        tools:ignore="VectorDrawableCompat" />
+
     <TextView
-        android:id="@+id/select"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtAccountChoose"
+        android:layout_width="195dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="44dp"
         android:text="@string/select_your_account"
-        android:textSize="32dp"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:padding="10dp"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black" />
-    <ImageView
-        android:id="@+id/student"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="25dp"
-        android:layout_below="@+id/select"
-        android:src="@drawable/student" />
-    <ImageView
-        android:id="@+id/teacher"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/teacher"
-        android:layout_below="@+id/select"
-        android:layout_toRightOf="@+id/student"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="110dp"/>
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
-    <EditText
-        android:id="@+id/studentpic"
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="248dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/txtAccountChoose"
+        app:srcCompat="@mipmap/hanging_light" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/student_1"
-        android:layout_marginLeft="27dp"
-        android:padding="10dp"
-        android:layout_below="@+id/student"
-        android:textSize="28dp"
-        android:textColorHint="#000000"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/teacherpic"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="203dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/teacher"
-        android:layout_marginLeft="247dp"
-        android:padding="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/teacher"
-        android:textSize="28dp"
-        android:textColorHint="#000000"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="345dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civTeacher"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:src="@mipmap/teacher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:civ_border_color="@color/backgroundBlue"
+        app:civ_border_width="3dp"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civStudent"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:src="@mipmap/student"
+        app:civ_border_color="@color/backgroundBlue"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <TextView
+        android:id="@+id/txtTeacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teacher"
+        android:textColor="#58BAB6"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/civTeacher"
+        app:layout_constraintStart_toStartOf="@+id/civTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/civTeacher" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student"
+        android:textColor="#58BAB6"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/civStudent"
+        app:layout_constraintStart_toStartOf="@+id/civStudent"
+        app:layout_constraintTop_toBottomOf="@+id/civStudent" />
 
 
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
