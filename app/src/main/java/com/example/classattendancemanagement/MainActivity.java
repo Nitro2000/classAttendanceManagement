@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        civTeacher = findViewById(R.id.civStudent);
+        civTeacher = findViewById(R.id.civTeacher);
 
         civTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupStudent.class);
+                Intent intent = new Intent(MainActivity.this, LoginTeacher.class);
                 MainActivity.this.startActivity(intent);
 
             }
@@ -32,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
         civStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupTeacher.class);
+                Intent intent = new Intent(MainActivity.this, SignupStudent.class);
                 MainActivity.this.startActivity(intent);
             }
         });
+
+
     }
 }

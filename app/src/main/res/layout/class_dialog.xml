@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+
+        <TextView
+            android:id="@+id/dia_add_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Class"
+            android:textColor="@color/backDarkBlue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="135dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@id/dia_add_class"
+            app:layout_constraintTop_toBottomOf="@id/dia_add_class"
+            android:background="@color/backDarkBlue"
+            />
+
+        <TextView
+            android:id="@+id/txtDiaClassName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Class name"
+            android:textColor="@color/backgroundBlue"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dia_add_class" />
+
+        <TextView
+            android:id="@+id/txtDiaSubjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Subject Name"
+            android:textColor="@color/backgroundBlue"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/txtDiaClassName"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtClassName" />
+
+        <EditText
+            android:id="@+id/edTxtClassName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter new class name"
+            android:inputType="textPersonName"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@+id/txtDiaClassName"
+            app:layout_constraintTop_toBottomOf="@+id/txtDiaClassName" />
+
+        <EditText
+            android:id="@+id/edTxtSubName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:hint="Enter subject"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/txtDiaSubjectName"
+            app:layout_constraintTop_toBottomOf="@+id/txtDiaSubjectName" />
+
+        <Button
+            android:id="@+id/btn_dia_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/dialog_buttons"
+            android:text="Cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edTxtSubName"
+            app:layout_constraintTop_toBottomOf="@+id/edTxtSubName" />
+
+        <Button
+            android:id="@+id/btn_dia_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/dialog_buttons"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtSubName"
+            app:layout_constraintTop_toTopOf="@+id/btn_dia_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

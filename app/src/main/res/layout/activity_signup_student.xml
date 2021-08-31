@@ -11,7 +11,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        android:layout_width="400dp"
+        android:layout_width="380dp"
         android:layout_height="400dp"
         android:layout_marginTop="200dp"
         app:cardCornerRadius="20dp"
@@ -29,6 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="15dp"
                 android:text="Name"
                 android:textColor="#EB28D7C9"
@@ -39,18 +41,19 @@
             <EditText
                 android:id="@+id/edTxtName"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="9dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="Student Name"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/txtName"
-                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+                app:layout_constraintTop_toBottomOf="@+id/txtName"
+                tools:layout_editor_absoluteX="14dp" />
 
             <TextView
                 android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
                 android:text="E-mail"
                 android:textColor="#EB28D7C9"
@@ -59,62 +62,63 @@
                 app:layout_constraintTop_toBottomOf="@+id/edTxtName" />
 
             <TextView
-                android:id="@+id/txtRollNo"
+                android:id="@+id/txtDep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
                 android:text="Uni. Roll No."
                 android:textColor="#EB28D7C9"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintStart_toStartOf="@+id/edTxtEmail"
+                app:layout_constraintTop_toBottomOf="@+id/edTxtEmail" />
 
             <TextView
                 android:id="@+id/txtPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
                 android:text="Password"
                 android:textColor="#EB28D7C9"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+                app:layout_constraintStart_toStartOf="@+id/edTxtDepName"
+                app:layout_constraintTop_toBottomOf="@+id/edTxtDepName" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/edTxtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="9dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="E-mail"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/txtEmail"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+                tools:layout_editor_absoluteX="14dp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/edTxtDepName"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="9dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="Ex - 191500XXX"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/txtRollNo"
-                app:layout_constraintTop_toBottomOf="@+id/txtRollNo" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDep"
+                tools:layout_editor_absoluteX="14dp" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName4"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="9dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/txtPass"
-                app:layout_constraintTop_toBottomOf="@+id/txtPass" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPass"
+                tools:layout_editor_absoluteX="14dp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnStudentRegis"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_border"
