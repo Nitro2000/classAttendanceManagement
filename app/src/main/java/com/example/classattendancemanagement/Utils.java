@@ -37,4 +37,22 @@ public class Utils {
     public static void addTakeAttendance(ModelStudent modelStudent) {
         takeAttendance.add(modelStudent);
     }
+
+    public static boolean notInTeacherClass(String className) {
+        for (ModelClass i : teacherClass) {
+            if (i.getClassName().equals(className)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean notInTakeAttendance(String studentName) {
+        for (ModelStudent i : takeAttendance) {
+            if (i.getStudentName().equals(studentName)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

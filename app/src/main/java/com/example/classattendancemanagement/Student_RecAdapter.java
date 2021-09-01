@@ -2,6 +2,7 @@ package com.example.classattendancemanagement;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ public class Student_RecAdapter extends RecyclerView.Adapter<Student_RecAdapter.
         void onClick(int position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
 
         private TextView txtStudentName, txtRollNo, txtStudentStatus;
         private CardView cardViewStudent;
@@ -33,7 +34,13 @@ public class Student_RecAdapter extends RecyclerView.Adapter<Student_RecAdapter.
             txtStudentStatus = itemView.findViewById(R.id.txtStudentStatus);
             cardViewStudent = itemView.findViewById(R.id.cardViewStudent);
             itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));
+            itemView.setOnCreateContextMenuListener(this);
 
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(getAdapterPosition(), 1, 0, "Delete");
         }
     }
 
@@ -69,19 +76,6 @@ public class Student_RecAdapter extends RecyclerView.Adapter<Student_RecAdapter.
         holder.txtStudentStatus.setText(arStudent.get(position).getStatus());
         holder.cardViewStudent.setCardBackgroundColor(changeColour(position));
 
-//        if (parentActivity.equals("Take Attendance")) {
-//            holder.txtStudentStatus.setVisibility(View.VISIBLE);
-//            holder.txtStudentStatus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(mContext, TakeAttendance.class);
-//                    intent.putExtra("className", arStudent.get(position).getClassName());
-//                    intent.putExtra("subName", arStudent.get(position).getSubjName());
-//                    intent.putExtra("positon", position);
-//                    mContext.startActivity(intent);
-//                }
-//            });
-//        }
     }
 
     private int changeColour(int position) {

@@ -2,6 +2,7 @@ package com.example.classattendancemanagement;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +15,18 @@ import java.util.ArrayList;
 
 public class Class_RecAdapter extends RecyclerView.Adapter<Class_RecAdapter.ViewHolder> {
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtClassName, txtSubName, txtTakeAttendance;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+        private TextView txtClassName, txtTakeAttendance;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtClassName = itemView.findViewById(R.id.txtClassName);
-            txtSubName = itemView.findViewById(R.id.txtSubName);
             txtTakeAttendance = itemView.findViewById(R.id.txtTakeAttendance);
+            itemView.setOnCreateContextMenuListener(this);
+        }
 
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(getAdapterPosition(), 1, 0, "Delete");
         }
     }
 
@@ -49,7 +54,6 @@ public class Class_RecAdapter extends RecyclerView.Adapter<Class_RecAdapter.View
     @Override
     public void onBindViewHolder(@NonNull Class_RecAdapter.ViewHolder holder, int position) {
         holder.txtClassName.setText(ar.get(position).getClassName());
-        holder.txtSubName.setText(ar.get(position).getSubjName());
 
         if (parentActivity.equals("Attender")) {
             holder.txtTakeAttendance.setVisibility(View.VISIBLE);
@@ -58,7 +62,6 @@ public class Class_RecAdapter extends RecyclerView.Adapter<Class_RecAdapter.View
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, TakeAttendance.class);
                     intent.putExtra("className", ar.get(position).getClassName());
-                    intent.putExtra("subName", ar.get(position).getSubjName());
                     intent.putExtra("positon", position);
                     mContext.startActivity(intent);
                 }

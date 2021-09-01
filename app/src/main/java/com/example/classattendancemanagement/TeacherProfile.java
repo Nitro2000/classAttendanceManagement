@@ -1,13 +1,23 @@
 package com.example.classattendancemanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class TeacherProfile extends AppCompatActivity {
 
-    TextView txtName, txtEmail, txtDep, edTxtName, edTxtEmail, edTxtDepName;
+    private static final String TAG = "TAG";
+    TextView txtName, txtEmail, txtDep, txtProfName, txtProfEmail, edTxtName, edTxtEmail, edTxtDepName;
+    ImageView ivProf;
+
     float v = 0;
 
     @Override
@@ -15,7 +25,30 @@ public class TeacherProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_profile);
 
+
         initalise();
+
+        AttenderFireBase.dRefTea.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                txtProfName.setText(document.getString("Name"));
+                                txtProfEmail.setText(document.getString("E-mail"));
+                                edTxtName.setText(document.getString("Name"));
+                                edTxtEmail.setText(document.getString("E-mail"));
+                                edTxtDepName.setText(document.getString("Department"));
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
 
         txtName.setTranslationY(300);
         txtEmail.setTranslationY(300);
@@ -45,10 +78,14 @@ public class TeacherProfile extends AppCompatActivity {
         txtName = findViewById(R.id.txtName);
         txtEmail = findViewById(R.id.txtEmail);
         txtDep = findViewById(R.id.txtDep);
+        txtProfName = findViewById(R.id.txtProfName);
+        txtProfEmail = findViewById(R.id.txtProfEmail);
         edTxtName = findViewById(R.id.edTxtName);
         edTxtEmail = findViewById(R.id.edTxtEmail);
         edTxtDepName = findViewById(R.id.edTxtDepName);
 
 
     }
+
+
 }

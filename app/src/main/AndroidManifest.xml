@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.classattendancemanagement">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,27 +10,28 @@
         android:roundIcon="@mipmap/attender_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassAttendanceManagement">
-        <activity android:name=".LoginTeacher"></activity>
+        <activity android:name=".LoginTeacher">
+
+        </activity>
         <activity android:name=".TakeAttendance" />
         <activity android:name=".TeacherStats" />
-        <activity android:name=".TeacherProfile">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".TeacherProfile"/>
         <activity
             android:name=".TeacherClass"
             android:label="Add Class"
             android:theme="@style/Theme" />
-        <activity android:name=".Teacher" />
+        <activity android:name=".Teacher" >
+        </activity>
         <activity android:name=".SignupTeacher">
 
         </activity>
         <activity android:name=".SignupStudent" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

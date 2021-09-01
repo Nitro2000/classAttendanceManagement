@@ -3,11 +3,9 @@ package com.example.classattendancemanagement;
 public class ModelClass {
 
     private String className;
-    private String subjName;
 
-    public ModelClass(String className, String subjName) {
+    public ModelClass(String className) {
         this.className = className;
-        this.subjName = subjName;
     }
 
     public String getClassName() {
@@ -18,11 +16,4 @@ public class ModelClass {
         this.className = className;
     }
 
-    public String getSubjName() {
-        return subjName;
-    }
-
-    public void setSubjName(String subjName) {
-        this.subjName = subjName;
-    }
 }
