@@ -6,10 +6,10 @@ public class ModelStudent {
     private String status;
 
 
-    public ModelStudent(String rollNo, String studentName) {
+    public ModelStudent(String rollNo, String studentName, String status) {
         this.rollNo = rollNo;
         this.studentName = studentName;
-        status = "";
+        this.status = "";
     }
 
     public String getRollNo() {

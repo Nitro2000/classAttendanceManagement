@@ -1,5 +1,7 @@
 package com.example.classattendancemanagement;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,44 +13,82 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
+
 
 public class LoginFragment extends Fragment {
 
+    TextView txtRegisterNow;
     EditText edTxtLoginEmail, edTxtLoginPass;
     TextView txtForgPass;
     Button btnLogin;
-
     float v = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
-
-        intialise(root);
-
-        edTxtLoginEmail.setTranslationY(300);
-        edTxtLoginPass.setTranslationY(300);
-        txtForgPass.setTranslationY(300);
-        btnLogin.setTranslationY(300);
-
-        edTxtLoginEmail.setAlpha(v);
-        edTxtLoginPass.setAlpha(v);
-        txtForgPass.setAlpha(v);
-        btnLogin.setAlpha(v);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.login_fragment, container, false);
 
 
-        edTxtLoginEmail.animate().translationY(0).alpha(1).setDuration(900).setStartDelay(600).start();
-        edTxtLoginPass.animate().translationY(0).alpha(1).setDuration(1200).setStartDelay(900).start();
-        txtForgPass.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1200).start();
-        btnLogin.animate().translationY(0).alpha(1).setDuration(1800).setStartDelay(1500).start();
+        initialise(view);
+
+        txtRegisterNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SignupTeacher.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        txtForgPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText getEmail = new EditText(view.getContext());
+                AlertDialog.Builder setEmail = new AlertDialog.Builder(view.getContext());
+                setEmail.setTitle("Reset Password");
+                setEmail.setMessage("Enter your \"EMAIL\" to receive reset link");
+                setEmail.setView(getEmail);
+
+                setEmail.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        String mail = getEmail.getText().toString();
+                        AttenderFireBase.fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getContext(), "Reset password link has been sent to your email", Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Toast.makeText(getContext(), "Error occured try again", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+                setEmail.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                setEmail.create().show();
+            }
+        });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +116,7 @@ public class LoginFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), Teacher.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(getActivity(), "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Invalid credentials or check your internet and try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -84,13 +124,19 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        return root;
-    }
-    public void intialise(ViewGroup root) {
-        edTxtLoginEmail = root.findViewById(R.id.edTxtLoginEmail);
-        edTxtLoginPass = root.findViewById(R.id.edTxtLoginPass);
+        return view;
 
-        txtForgPass = root.findViewById(R.id.txtForgPass);
-        btnLogin = root.findViewById(R.id.btnLogin);
     }
+    public void initialise(ViewGroup view) {
+        txtRegisterNow = view.findViewById(R.id.txtRegisterNow);
+
+
+        edTxtLoginEmail = view.findViewById(R.id.edTxtLoginEmail);
+        edTxtLoginPass = view.findViewById(R.id.edTxtLoginPass);
+
+        txtForgPass = view.findViewById(R.id.txtForgPass);
+        btnLogin = view.findViewById(R.id.btnLogin);
+    }
+
+
 }

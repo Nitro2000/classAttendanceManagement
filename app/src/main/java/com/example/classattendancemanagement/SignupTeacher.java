@@ -85,6 +85,7 @@ public class SignupTeacher extends AppCompatActivity {
                             Toast.makeText(SignupTeacher.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignupTeacher.this, Teacher.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(SignupTeacher.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -98,8 +99,9 @@ public class SignupTeacher extends AppCompatActivity {
         txtLoginNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignupTeacher.this, LoginTeacher.class);
+                Intent intent = new Intent(SignupTeacher.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

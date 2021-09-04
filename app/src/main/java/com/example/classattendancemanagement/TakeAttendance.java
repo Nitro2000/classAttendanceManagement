@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +40,8 @@ public class TakeAttendance extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView ivBack, ivSave;
     private EditText edTxtStudentName, edTxtRollNo;
-    private Button btn_diaS_cancel, btn_diaS_add;
-    private TextView  txtDiaStudentName, txtDiaRollNo, txtToolClassName, txtToolDate;
+    private Button btn_diaS_cancel, btn_diaS_add, btnUpdAttendance;
+    private TextView txtToolClassName, txtToolDate;
     private RecyclerView studentRecView;
     private Student_RecAdapter studentRecAdapter;
     private AttendanceCalendar calendar;
@@ -47,8 +53,6 @@ public class TakeAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
 
-        //TODO remove utils instance from take attendance
-        Utils.getInstance();
 
         // Initialising widgets
         initialise();
@@ -61,6 +65,15 @@ public class TakeAttendance extends AppCompatActivity {
         txtToolDate.setText(calendar.getDate());
         int position = intent.getIntExtra("position", -1);
         ivBack.setOnClickListener(v -> onBackPressed());
+        ivSave.setOnClickListener(v -> addStatus());
+
+        btnUpdAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadStatusData();
+            }
+        });
+
 
         // Menu adding in toolbar
         toolbar.inflateMenu(R.menu.menu_student_attendance);
@@ -84,12 +97,47 @@ public class TakeAttendance extends AppCompatActivity {
 
 
         // Setting recycler view for students
+
         studentRecView.setAdapter(studentRecAdapter);
         studentRecView.setLayoutManager(new LinearLayoutManager(this));
         studentRecAdapter.setOnItemClickListener(this::change);
         loadStudentData();
 
 
+
+
+    }
+
+
+    private void addStatus() {
+        for (ModelStudent ms : Utils.getTakeAttendance()) {
+            Map<String, String> mapstatus = new HashMap<>();
+            mapstatus.put("Status", ms.getStatus());
+            AttenderFireBase.cRef4 = AttenderFireBase.cRef3.document(ms.getStudentName()).collection(ms.getStudentName());
+            AttenderFireBase.cRef4.document(calendar.getDate()).set(mapstatus, SetOptions.merge());
+        }
+        Toast.makeText(this, "Attendance saved", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadStatusData() {
+        for (ModelStudent ms : Utils.getTakeAttendance()) {
+            AttenderFireBase.cRef4 = AttenderFireBase.cRef3.document(ms.getStudentName()).collection(ms.getStudentName());
+            AttenderFireBase.cRef4.document(calendar.getDate())
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                ms.setStatus(document.getString("Status"));
+                            }
+                        } else {
+                            Toast.makeText(TakeAttendance.this, "No attendance on this day", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        }
+        studentRecAdapter.notifyDataSetChanged();
     }
 
     private void loadStudentData() {
@@ -100,10 +148,13 @@ public class TakeAttendance extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                Utils.addTakeAttendance(new ModelStudent(documentSnapshot.getString("RollNo"), documentSnapshot.getId()));
+                                Utils.addTakeAttendance(new ModelStudent(documentSnapshot.getString("RollNo"), documentSnapshot.getId(), "P"));
+                            }
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                Utils.getTakeAttendance().sort((m, n) -> Integer.compare(Integer.parseInt(m.getRollNo()), Integer.parseInt(n.getRollNo())));
                             }
                             studentRecAdapter.notifyDataSetChanged();
                         }  else {
@@ -122,6 +173,7 @@ public class TakeAttendance extends AppCompatActivity {
     private void onCalendarOkClicked(int year, int month, int day) {
         calendar.setDate(year, month, day);
         txtToolDate.setText(calendar.getDate());
+        loadStudentData();
     }
 
     private void change(int position1) {
@@ -159,22 +211,17 @@ public class TakeAttendance extends AppCompatActivity {
         btn_diaS_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AttendanceCalendar cal = new AttendanceCalendar();
                 String studentName = edTxtStudentName.getText().toString();
                 String rollNo = edTxtRollNo.getText().toString();
-                String date = cal.getDate();
                 if (!studentName.equals("")) {
-                    if (Utils.notInTakeAttendance(studentName)) {
+                    if (Utils.notInTakeAttendance(studentName) && Utils.notInTakeAttendanceRoll(rollNo)) {
                         try {
                             int roll = Integer.parseInt(rollNo);
 
                             Map<String, Object> map = new HashMap<>();
                             map.put("RollNo", rollNo);
-                            map.put("Status", "");
-                            map.put("Date", date);
-
                             AttenderFireBase.cRef3.document(studentName).set(map);
-                            Utils.addTakeAttendance(new ModelStudent(rollNo, studentName));
+                            Utils.addTakeAttendance(new ModelStudent(rollNo, studentName, "P"));
                             edTxtRollNo.setText(String.valueOf(roll + 1));
                             studentRecAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
@@ -182,6 +229,8 @@ public class TakeAttendance extends AppCompatActivity {
                             Toast.makeText(TakeAttendance.this, "Enter correct roll no", Toast.LENGTH_SHORT).show();
                         }
                         edTxtStudentName.setText("");
+                    } else {
+                        Toast.makeText(TakeAttendance.this, "Enter new student name and roll no", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(TakeAttendance.this, "Fill fields properly", Toast.LENGTH_SHORT).show();
@@ -196,6 +245,8 @@ public class TakeAttendance extends AppCompatActivity {
 
         ivBack = findViewById(R.id.ivBack);
         ivSave = findViewById(R.id.ivSave);
+
+        btnUpdAttendance = findViewById(R.id.btnUpdAttendance);
 
         txtToolClassName = findViewById(R.id.txtToolClassName);
         txtToolDate = findViewById(R.id.txtToolDate);
@@ -223,4 +274,5 @@ public class TakeAttendance extends AppCompatActivity {
         AttenderFireBase.cRef3.document(studentName).delete();
         studentRecAdapter.notifyItemRemoved(position);
     }
+
 }

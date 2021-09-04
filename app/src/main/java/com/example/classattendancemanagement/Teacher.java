@@ -41,7 +41,6 @@ public class Teacher extends AppCompatActivity {
     private RecyclerView attendance_recView;
     private Class_RecAdapter attendanceAdapter;
 
-    private Button btn;
 
 
     @Override
@@ -68,10 +67,6 @@ public class Teacher extends AppCompatActivity {
                         startActivity(new Intent(Teacher.this, TeacherClass.class));
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.stats:
-                        startActivity(new Intent(Teacher.this, TeacherStats.class));
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
                     case R.id.profile:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Teacher.this, TeacherProfile.class));
@@ -79,13 +74,41 @@ public class Teacher extends AppCompatActivity {
                     case R.id.logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         AttenderFireBase.getfAuth().signOut();
+                        startActivity(new Intent(Teacher.this, MainActivity.class));
                         finish();
-                        startActivity(new Intent(Teacher.this, LoginTeacher.class));
+                        break;
+                    case R.id.about:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(Teacher.this, TeacherAbout.class));
                         break;
                 }
                 return false;
             }
         });
+
+        View headerView = navigationView.getHeaderView(0);
+        txtNavTeacherName = headerView.findViewById(R.id.txtNavTeacherName);
+        txtNavTeacherEmail = headerView.findViewById(R.id.txtNavTeacherEmail);
+
+        AttenderFireBase.dRefTea.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                txtNavTeacherName.setText(document.getString("Name"));
+                                txtNavTeacherEmail.setText(document.getString("E-mail"));
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+
 
         attendance_recView = findViewById(R.id.attendance_recView);
         attendanceAdapter = new Class_RecAdapter(this, Utils.getTeacherClass(), "Attender");
@@ -94,21 +117,11 @@ public class Teacher extends AppCompatActivity {
         loadData();
 
 
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attendanceAdapter.notifyDataSetChanged();
-            }
-        });
-
-
     }
 
     private void intialisation() {
 
         Utils.getInstance();
-        btn = findViewById(R.id.btnRefresh);
 
         toolbar = findViewById(R.id.navig_toolbar);
 
@@ -148,8 +161,13 @@ public class Teacher extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        attendanceAdapter.notifyDataSetChanged();
+    }
 }

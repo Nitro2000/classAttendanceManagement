@@ -55,4 +55,13 @@ public class Utils {
         }
         return true;
     }
+
+    public static boolean notInTakeAttendanceRoll(String rollNo) {
+        for (ModelStudent i : takeAttendance) {
+            if (i.getRollNo().equals(rollNo)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

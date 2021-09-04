@@ -13,6 +13,7 @@ public class AttenderFireBase {
     public static DocumentReference dRefTea;
     public static CollectionReference cRef2;
     public static CollectionReference cRef3;
+    public static CollectionReference cRef4;
 
 
     public static void setdRefTea(DocumentReference dRefTea) {
@@ -26,10 +27,6 @@ public class AttenderFireBase {
 
     public static void setfStore(FirebaseFirestore fStore) {
         AttenderFireBase.fStore = fStore;
-    }
-
-    public static void setcRefTea(CollectionReference cRefTea) {
-        AttenderFireBase.cRefTea = cRefTea;
     }
 
     public static FirebaseAuth getfAuth() {

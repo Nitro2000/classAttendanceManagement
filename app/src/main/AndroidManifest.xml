@@ -10,22 +10,17 @@
         android:roundIcon="@mipmap/attender_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassAttendanceManagement">
-        <activity android:name=".LoginTeacher">
-
-        </activity>
         <activity android:name=".TakeAttendance" />
-        <activity android:name=".TeacherStats" />
         <activity android:name=".TeacherProfile"/>
         <activity
             android:name=".TeacherClass"
-            android:label="Add Class"
+            android:label="Class"
             android:theme="@style/Theme" />
-        <activity android:name=".Teacher" >
-        </activity>
-        <activity android:name=".SignupTeacher">
-
-        </activity>
-        <activity android:name=".SignupStudent" />
+        <activity android:name=".Teacher"/>
+        <activity android:name=".SignupTeacher"/>
+        <activity android:name=".TeacherAbout"
+            android:label="About Us"
+            android:theme="@style/Theme"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

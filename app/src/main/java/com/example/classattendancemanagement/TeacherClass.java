@@ -61,7 +61,6 @@ public class TeacherClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // TODO : round dialog box
                 AlertDialog.Builder builder = new AlertDialog.Builder(TeacherClass.this);
                 View view1 = LayoutInflater.from(TeacherClass.this).inflate(R.layout.class_dialog, null);
                 builder.setView(view1);
@@ -94,7 +93,7 @@ public class TeacherClass extends AppCompatActivity {
                                 dialog.dismiss();
                             } else {
                                 edTxtClassName.setText("");
-                                Toast.makeText(TeacherClass.this, "Enter diff class name", Toast.LENGTH_LONG).show();
+                                Toast.makeText(TeacherClass.this, "Enter different class name", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             Toast.makeText(TeacherClass.this, "Fill fields properly", Toast.LENGTH_SHORT).show();
