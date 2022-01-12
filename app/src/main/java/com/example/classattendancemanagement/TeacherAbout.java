@@ -13,7 +13,7 @@ public class TeacherAbout extends AppCompatActivity {
 
     TextView txtWelcome, txtWelAns, txtMaker, txtMakerAns, txtMakerAns2,
             txtHowItWorks, txtClass, txtClassAns, txtAttToolBar, txtUpdatePrev, txtUpdPrevAns
-            ,txtContact, txtContactAns, txtContactAns2;
+            ,txtContact, txtContactAns;
     ImageView ivTool;
     int wel, mak, con, how, clas, attend, update;
 
@@ -60,11 +60,9 @@ public class TeacherAbout extends AppCompatActivity {
                 if (con == 2) {
                     con = 3;
                     txtContactAns.setVisibility(View.GONE);
-                    txtContactAns2.setVisibility(View.GONE);
                 } else {
                     con = 2;
                     txtContactAns.setVisibility(View.VISIBLE);
-                    txtContactAns2.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -136,7 +134,6 @@ public class TeacherAbout extends AppCompatActivity {
         txtMakerAns2 = findViewById(R.id.txtMakerAns2);
         txtContact = findViewById(R.id.txtContact);
         txtContactAns = findViewById(R.id.txtContactAns);
-        txtContactAns2 = findViewById(R.id.txtContactAns2);
         txtHowItWorks = findViewById(R.id.txtHowItWorks);
         txtClass = findViewById(R.id.txtClass);
         txtClassAns = findViewById(R.id.txtClassAns);

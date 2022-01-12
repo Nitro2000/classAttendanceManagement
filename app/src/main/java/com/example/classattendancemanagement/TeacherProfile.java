@@ -1,10 +1,16 @@
 package com.example.classattendancemanagement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +25,8 @@ public class TeacherProfile extends AppCompatActivity {
     ImageView ivProf;
 
     float v = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class TeacherProfile extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
+                                ivProf.setImageURI(Uri.parse("content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FCamera%2FIMG_20210822_150734.jpg"));
                                 txtProfName.setText(document.getString("Name"));
                                 txtProfEmail.setText(document.getString("E-mail"));
                                 edTxtName.setText(document.getString("Name"));
@@ -71,7 +80,28 @@ public class TeacherProfile extends AppCompatActivity {
         edTxtEmail.animate().translationY(0).alpha(1).setDuration(900).setStartDelay(600).start();
         edTxtDepName.animate().translationY(0).alpha(1).setDuration(1200).setStartDelay(900).start();
 
+
+        ivProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 10);
+            }
+        });
+
+
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10) {
+            if (resultCode == Activity.RESULT_OK);
+            Uri uri = data.getData();
+            ivProf.setImageURI(Uri.parse(uri + ""));
+            AttenderFireBase.dRefTea.update("ImageUri", uri + "");
+        }
+    }
+
 
     private void initalise() {
 
@@ -83,6 +113,7 @@ public class TeacherProfile extends AppCompatActivity {
         edTxtName = findViewById(R.id.edTxtName);
         edTxtEmail = findViewById(R.id.edTxtEmail);
         edTxtDepName = findViewById(R.id.edTxtDepName);
+        ivProf = findViewById(R.id.ivprof);
 
 
     }

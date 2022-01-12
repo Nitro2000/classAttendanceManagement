@@ -74,6 +74,7 @@ public class SignupTeacher extends AppCompatActivity {
                             docTeaMap.put("Name", name);
                             docTeaMap.put("E-mail", email);
                             docTeaMap.put("Department", depName);
+                            docTeaMap.put("ImageUri", "https://img.freepik.com/free-vector/teacher-concept-illustration_114360-2166.jpg?size=338&ext=jpg&ga=GA1.2.2103811857.1630281600");
 
                             AttenderFireBase.dRefTea.set(docTeaMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

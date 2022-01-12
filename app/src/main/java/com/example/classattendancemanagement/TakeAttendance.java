@@ -231,6 +231,8 @@ public class TakeAttendance extends AppCompatActivity {
                         edTxtStudentName.setText("");
                     } else {
                         Toast.makeText(TakeAttendance.this, "Enter new student name and roll no", Toast.LENGTH_SHORT).show();
+                        edTxtRollNo.setText("");
+                        edTxtStudentName.setText("");
                     }
                 } else {
                     Toast.makeText(TakeAttendance.this, "Fill fields properly", Toast.LENGTH_SHORT).show();

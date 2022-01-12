@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class Teacher extends AppCompatActivity {
     private Toolbar toolbar;
 
     private TextView txtNavTeacherName, txtNavTeacherEmail;
+    private ImageView ivNavProf;
 
     private RecyclerView attendance_recView;
     private Class_RecAdapter attendanceAdapter;
@@ -161,7 +163,7 @@ public class Teacher extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 

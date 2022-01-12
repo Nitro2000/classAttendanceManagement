@@ -94,7 +94,7 @@
                 android:textColor="@color/backgroundBlue"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@id/txtContactAns2" />
+                app:layout_constraintTop_toBottomOf="@id/txtContactAns" />
 
             <TextView
                 android:id="@+id/txtClass"
@@ -218,16 +218,6 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/txtContact" />
 
-            <TextView
-                android:id="@+id/txtContactAns2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Phone : 9058832180"
-                android:textSize="20sp"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@id/txtContactAns" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

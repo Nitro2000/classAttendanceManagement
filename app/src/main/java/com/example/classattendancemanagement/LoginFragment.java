@@ -51,7 +51,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
+        // Setting new password by link from firebase
         txtForgPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +137,7 @@ public class LoginFragment extends Fragment {
         txtForgPass = view.findViewById(R.id.txtForgPass);
         btnLogin = view.findViewById(R.id.btnLogin);
     }
+
 
 
 }

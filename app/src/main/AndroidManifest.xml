@@ -10,18 +10,25 @@
         android:roundIcon="@mipmap/attender_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassAttendanceManagement">
-        <activity android:name=".TakeAttendance" />
-        <activity android:name=".TeacherProfile"/>
+        <activity android:name=".TakeAttendance"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TeacherProfile"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TeacherClass"
             android:label="Class"
-            android:theme="@style/Theme" />
-        <activity android:name=".Teacher"/>
-        <activity android:name=".SignupTeacher"/>
+            android:theme="@style/Theme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Teacher"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignupTeacher"
+            android:screenOrientation="portrait"/>
         <activity android:name=".TeacherAbout"
             android:label="About Us"
-            android:theme="@style/Theme"/>
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
