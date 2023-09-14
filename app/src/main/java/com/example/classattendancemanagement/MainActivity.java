@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class SlidePagerAdapter extends FragmentStatePagerAdapter {
+    private static class SlidePagerAdapter extends FragmentStatePagerAdapter {
 
         public SlidePagerAdapter(FragmentManager fm) {
             super(fm);

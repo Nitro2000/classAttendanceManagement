@@ -11,24 +11,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassAttendanceManagement">
         <activity android:name=".TakeAttendance"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity android:name=".TeacherProfile"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity
             android:name=".TeacherClass"
             android:label="Class"
             android:theme="@style/Theme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity android:name=".Teacher"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity android:name=".SignupTeacher"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity android:name=".TeacherAbout"
             android:label="About Us"
             android:theme="@style/Theme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
